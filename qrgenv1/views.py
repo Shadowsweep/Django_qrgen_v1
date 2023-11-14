@@ -4,7 +4,7 @@ from qrcode import *
 # data = None
 import os
 #import cv2
-import numpy as np
+#import numpy as np
 from django.http import HttpResponseRedirect
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
