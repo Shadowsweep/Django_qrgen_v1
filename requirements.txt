@@ -1,5 +1,5 @@
 dj_database_url==2.1.0
-Django==4.1.6
+
 qrcode==7.4.2
 pypng==0.20220715.0
 PyQRCode==1.2.1
