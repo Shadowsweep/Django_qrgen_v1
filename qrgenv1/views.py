@@ -3,7 +3,7 @@ from django.shortcuts import render
 from qrcode import *
 # data = None
 import os
-import cv2
+#import cv2
 import numpy as np
 from django.http import HttpResponseRedirect
 from django.http import JsonResponse
@@ -48,47 +48,6 @@ def scan(request):
     return render(request, 'qrreader.html')
  
     
-def qr_scanner(request):
-    cap = cv2.VideoCapture(0)
-    detector = cv2.QRCodeDetector()
-
-    while True:
-        _, img = cap.read()
-        data, _, _ = detector.detectAndDecode(img)
-
-        if data:
-            a = data
-            break
-
-        cv2.imshow('QR Code Scanner', img)
-
-        if cv2.waitKey(1) == ord('q'):
-            break
-
-    b = webbrowser.open(str(a))
-    cap.release()
-    cv2.destroyAllWindows()
-
-    return render(request, 'qrreader.html', {'qr_content': a})
-
-
-
-@csrf_exempt
-def process_webcam_stream(request):
-    if request.method == 'POST':
-        data = json.loads(request.body)
-        webcam_image = data['image']
-
-        # Decode QR code from the webcam image
-        qr_code_data = decode_qr_code(webcam_image)
-
-        # Return the QR code data or an error message
-        if qr_code_data:
-            return JsonResponse({'qr_code_data': qr_code_data})
-        else:
-            return JsonResponse({'error': 'QR code not found'})
-
-    return JsonResponse({'error': 'Invalid request'})
 
 
 
